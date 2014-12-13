@@ -1,78 +1,81 @@
-﻿using ConsoleApplication1;
-using OOP;
-using System;
-using System.Collections;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Vehicle.Transport;
 
-namespace ConsoleApplication5
+namespace Vehicle
 {
-    class Program
+    internal class Program
     {
-        public static ICanDrive iCanDriveInstance { get; set; }
+        private static readonly List<Transport.Vehicle> Transport = new List<Transport.Vehicle>();
 
+        //private static void DriveAll()
+        //{
+        //    foreach (var urbanTransports in Transport)
+        //    {
+        //        urbanTransports.Drive();
+        //    }
+        //}
 
-        private static List<ICanDrive> UrbanTransport = new List<ICanDrive>();
-//        private static ArrayList vehicles_al = new ArrayList();
-/*        private static void driveAll()
+        public static void Main(string[] args)
         {
-            foreach(var vehicle in vehicles)
+            Taxi carTaxi = new Taxi("Natalia", 4, 12, 5);
+            Transport.Vehicle carTaxi2 = new Taxi("Lucya", 3, 7, 5);
+            Car carTaxi3 = new Taxi("Boris", 4, 10, 6);
+
+            var bus = new Bus("Natalia", 24, 20, 3);
+            var bus2 = new Bus("Kolya", 8, 20, 800);
+
+            var intercity = new Train("Fedya", 300, 500, 30000);
+            var intercity2 = new Train("Simon", 200, 200, 40000);
+            intercity.DriverName = "Igor";
+
+            Transport.Add(carTaxi);
+            Transport.Add(bus);
+            Transport.Add(intercity);
+            Transport.Add(carTaxi2);
+            Transport.Add(carTaxi3);
+            Transport.Add(bus2);
+            Transport.Add(intercity2);
+
+            Transport.Add(new Car("Tolyan", 8, 10));
+            Transport.Add(new Car("Risya", 4, 9));
+            Transport.Add(new Bicycle("Tusya", 1));
+            Transport.Add(new Bicycle("Tusya & Boris", 2));
+            Transport.Add(new Bike("Zosya", 1));
+
+            foreach (Transport.Vehicle transport in Transport)
             {
-                vehicle.Drive();
+                transport.Drive();
+
+                IShipping shipping = transport as IShipping;
+                if (shipping == null)
+                {
+                    Console.WriteLine("Not Shipping. Skip");
+                    continue;
+                }
+
+                if (shipping.ComfortLevel < 4)
+                {
+                    Console.WriteLine("Small Comfort level. Skip");
+                    continue;
+                }
+
+
+                int cost = shipping.GetCost(50);
+                if (cost > 250)
+                {
+                    Console.WriteLine("Too expencive: {0}. Skip", cost);
+                    continue;
+                }
+
+                Console.WriteLine("Go. Trip cost: {0}", cost);
             }
-        }*/
 
-        private static void driveAll()
-        {
-            foreach (ICanDrive urbanTransports in UrbanTransport)
-            {
-                urbanTransports.Drive();
-            }
-        }
+            //DriveAll();
 
-        static void Main(string[] args)
-        {
-            var cartaxi = new CarTaxi("BMW X9", "Natalia", 8, 100, 5);
-            var bus = new Bus("Volvo", "Natalia", 15, 100, 20, 3);
 
-            var subway = new Underground(4);
-
-            /*vehicles.Add(car);
-            vehicles.Add(bus);
-            vehicles.Add(subway);*/
-
-            UrbanTransport.Add(carTaxi);
-            urbanTransports.Add(bus);
-
-            driveAll();
-
-/*            var car = new Car("BMW X9", "Natalia", 8, 100);
-            car.Drive();
-
-            string driver = car.DriverName;
-            Console.WriteLine(car.DriverName);
-
-            car.DriverName = "Igor";
-            Console.WriteLine(car.DriverName);
-
-            car.DriverName = "Boris";
-            Console.WriteLine(car.DriverName);
-
-            var bus = new Bus("Volvo", "Natalia", 15, 100, 20);
-            bus.Drive();
-
-            Console.WriteLine(bus.DriverName);
-
-            bus.DriverName = "Vasya";
-            Console.WriteLine(bus.DriverName);
-
-            bus.DriverName = "Boris";
-            Console.WriteLine(bus.DriverName);*/
 
             Console.ReadLine();
-
         }
     }
 }
